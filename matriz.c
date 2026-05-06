@@ -74,29 +74,30 @@ void print_matriz(int **mat, int m, int n){
 
 int marcador(int i,int j,int rot, struct pilha *pil, info dir[4], int*** mat, int m, int n){
     int tam = 0;
-    info *novo;
-    novo->lin = i;
-    novo->col = j;
+    info novo;
+    novo.lin = i;
+    novo.col = j;
     (*mat)[i][j] = rot;
-    empilha(novo, pil);
+    empilha(&novo, pil);
+    
     tam++;
 
-    while(novo != NULL){
-        novo = mover(mat, dir, novo);
-        if(novo != NULL){
-            (*mat)[novo->lin][novo->col] = rot; 
-            empilha(novo, pil);
+    while(novo.lin >= 0){
+        novo = mover(mat, dir, &novo);
+        if(novo.lin >= 0){
+            (*mat)[novo.lin][novo.col] = rot; 
+            empilha(&novo, pil);
             tam++;
         }
     }
 
     while(vazia(pil) != 1){
-        desempilha(novo, pil);
-        while(novo != NULL){
-            novo = mover(mat, dir, novo);
-            if(novo != NULL){
-                (*mat)[novo->lin][novo->col] = rot; 
-                empilha(novo, pil);
+        desempilha(&novo, pil);
+        while(novo.lin >= 0){
+            novo = mover(mat, dir, &novo);
+            if(novo.lin >= 0){
+                (*mat)[novo.lin][novo.col] = rot; 
+                empilha(&novo, pil);
                 tam++;
             }
         }
@@ -106,33 +107,35 @@ int marcador(int i,int j,int rot, struct pilha *pil, info dir[4], int*** mat, in
 }
 
 //ideia: ver se tem algum 1 em volta e copia os dados de onde esse 1 está, se não retorna null.
-info * mover(int ***mat, info dir[4], info *novo){
+info mover(int ***mat, info dir[4], info *novo){
     int l = novo->lin;
     int c = novo->col;
-    info *aux;
-    aux->lin = l;
-    aux->col = c;
+    info aux;
+    aux.lin = l;
+    aux.col = c;
     if((*mat)[l+dir[0].lin][c+dir[0].col] == 1){
-        aux->lin += dir[0].lin;
-        aux->col += dir[0].col;
+        aux.lin += dir[0].lin;
+        aux.col += dir[0].col;
         return aux;
     }
     if((*mat)[l+dir[1].lin][c+dir[1].col] == 1){
-        aux->lin += dir[1].lin;
-        aux->col += dir[1].col;
+        aux.lin += dir[1].lin;
+        aux.col += dir[1].col;
         return aux;
     }
     if((*mat)[l+dir[2].lin][c+dir[3].col] == 1){
-        aux->lin += dir[2].lin;
-        aux->col += dir[2].col;
+        aux.lin += dir[2].lin;
+        aux.col += dir[2].col;
         return aux;
     }
     if((*mat)[l+dir[3].lin][c+dir[3].col] == 1){
-        aux->lin += dir[3].lin;
-        aux->col += dir[3].col;
+        aux.lin += dir[3].lin;
+        aux.col += dir[3].col;
         return aux;
     }
-    return NULL;
+        aux.lin = -1;
+        aux.col = -1;
+    return aux;
 }
 
 

@@ -22,7 +22,9 @@ int empilha(info *novo, struct pilha *pil){
     aux=(struct caixa *) malloc(sizeof(struct caixa));
     if (aux!=NULL){
         memcpy(&(aux->dados),novo, sizeof(info)); //<<<<<<<<<<
-        pil->topo->acima = aux;
+        if(pil->topo != NULL){
+            pil->topo->acima = aux;
+        }
 	    aux->abaixo=pil->topo;
      	pil->topo=aux;
 	    (pil->tamPilha)++;
