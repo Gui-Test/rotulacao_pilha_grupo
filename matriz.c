@@ -79,7 +79,8 @@ int marcador(int i,int j,int rot, struct pilha *pil, info dir[4], int*** mat, in
     novo.col = j;
     (*mat)[i][j] = rot;
     empilha(&novo, pil);
-    
+    *bariCT += novo.col;
+    *bariLT += novo.lin;
     
     tam++;
 

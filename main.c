@@ -40,11 +40,12 @@ int main(){
                 }
                 bariCT = 0;
                 bariLT = 0;
-                printf("\n Baricentro: %d , %d", baricentroL, baricentroC);
+                
                 reinicia(pilha);
             }
         }
     }
+    printf("\n Baricentro: %d , %d", baricentroL, baricentroC);
 
     print_matriz(mat,m,n);
     printf("MAIOR OBJETO: %d\n", maior_rotulo);
