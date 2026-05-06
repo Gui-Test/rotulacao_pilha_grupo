@@ -72,7 +72,7 @@ void print_matriz(int **mat, int m, int n){
     printf("\n");
 }
 
-int marcador(int i,int j,int rot, struct pilha *pil, info dir[4], int*** mat, int m, int n){
+int marcador(int i,int j,int rot, struct pilha *pil, info dir[4], int*** mat, int m, int n, int* bariLT, int* bariCT){
     int tam = 0;
     info novo;
     novo.lin = i;
@@ -80,12 +80,15 @@ int marcador(int i,int j,int rot, struct pilha *pil, info dir[4], int*** mat, in
     (*mat)[i][j] = rot;
     empilha(&novo, pil);
     
+    
     tam++;
 
     while(novo.lin >= 0){
         novo = mover(mat, dir, &novo);
         if(novo.lin >= 0){
             (*mat)[novo.lin][novo.col] = rot; 
+            *bariCT += novo.col;
+            *bariLT += novo.lin;
             empilha(&novo, pil);
             tam++;
         }
@@ -96,6 +99,8 @@ int marcador(int i,int j,int rot, struct pilha *pil, info dir[4], int*** mat, in
         while(novo.lin >= 0){
             novo = mover(mat, dir, &novo);
             if(novo.lin >= 0){
+                *bariCT += novo.col;
+                *bariLT += novo.lin;
                 (*mat)[novo.lin][novo.col] = rot; 
                 empilha(&novo, pil);
                 tam++;
