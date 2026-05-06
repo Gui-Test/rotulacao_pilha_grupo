@@ -5,6 +5,8 @@ int main(){
     int m = 0,n = 0;
     int rotulo = 0;
     info direcao[4]={{-1,0},{0,1},{1,0},{0,-1}}; //Norte, Leste, Sul, Oeste
+    int bariLT = 0, bariCT = 0;
+    int baricentroL = 0, baricentroC = 0;
 
     struct pilha *pilha;
     pilha = cria();
@@ -27,12 +29,18 @@ int main(){
         for (int j=0;j < n;j++){
             if (mat[i][j] == 1){
                 rotulo+=10;
-                tam_objeto = marcador(i,j,rotulo,pilha,direcao,&mat,m,n);
-                printf("\nObjeto %d: tamanho %d\n", rotulo, tam_objeto);
+                printf("(%d %d)", i, j);
+                tam_objeto = marcador(i,j,rotulo,pilha,direcao,&mat,m,n, &bariLT, &bariCT);
+                printf("\nObjeto %d: tamanho %d", rotulo, tam_objeto);
                 if(tam_objeto > maior){
                     maior = tam_objeto;
                     maior_rotulo = rotulo;
+                    baricentroL = bariLT / tam_objeto; 
+                    baricentroC = bariCT / tam_objeto;
                 }
+                bariCT = 0;
+                bariLT = 0;
+                printf("\n Baricentro: %d , %d", baricentroL, baricentroC);
                 reinicia(pilha);
             }
         }

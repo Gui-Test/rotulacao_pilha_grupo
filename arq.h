@@ -37,6 +37,6 @@ int ** cria_matriz(int *m, int *n);
 void insere_matriz(int*** mat, int m, int n);
 void print_matriz(int **mat, int m, int n);
 info mover(int ***mat, info dir[4], info *novo);
-int marcador(int i,int j,int rot, struct pilha *pil, info dir[4], int*** mat, int m, int n);
+int marcador(int i,int j,int rot, struct pilha *pil, info dir[4], int*** mat, int m, int n, int* bariLT, int* bariCT);
 void limpa_matriz(int ***mat, int m, int n, int rot);
 
