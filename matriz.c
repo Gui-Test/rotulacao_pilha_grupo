@@ -65,7 +65,7 @@ void print_matriz(int **mat, int m, int n){
     printf("\n");
     for(int i=0;i<m;i++){
         for(int j=0;j<n;j++){
-            printf("%d ", mat[i][j]);
+            printf("%4d", mat[i][j]);
         }
         printf("\n");
     }

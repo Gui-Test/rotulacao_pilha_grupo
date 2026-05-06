@@ -23,7 +23,6 @@ int main(){
     int maior = 0;
     int maior_rotulo = 0;
 
-
     for (int i=0;i < m;i++){
         for (int j=0;j < n;j++){
             if (mat[i][j] == 1){
