@@ -65,7 +65,7 @@ void print_matriz(int **mat, int m, int n){
     printf("\n");
     for(int i=0;i<m;i++){
         for(int j=0;j<n;j++){
-            printf("%d ", mat[i][j]);
+            printf("%4d", mat[i][j]);
         }
         printf("\n");
     }
@@ -91,10 +91,11 @@ int marcador(int i,int j,int rot, struct pilha *pil, info dir[4], int*** mat, in
             *bariLT += novo.lin;
             empilha(&novo, pil);
             tam++;
+           
         }
     }
-
-    while(vazia(pil) != 1){
+    
+    while(vazia(pil) != SIM){
         desempilha(&novo, pil);
         while(novo.lin >= 0){
             novo = mover(mat, dir, &novo);
@@ -128,7 +129,7 @@ info mover(int ***mat, info dir[4], info *novo){
         aux.col += dir[1].col;
         return aux;
     }
-    if((*mat)[l+dir[2].lin][c+dir[3].col] == 1){
+    if((*mat)[l+dir[2].lin][c+dir[2].col] == 1){
         aux.lin += dir[2].lin;
         aux.col += dir[2].col;
         return aux;
