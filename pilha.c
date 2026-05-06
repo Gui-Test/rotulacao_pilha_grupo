@@ -40,7 +40,6 @@ int desempilha(info *reg, struct pilha *pil){
 	    aux=pil->topo->abaixo;
 	    free(pil->topo);
 	    pil->topo=aux;
-        pil->topo->acima = NULL;
         (pil->tamPilha)--;
         return SUCESSO;
     }else
