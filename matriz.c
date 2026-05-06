@@ -18,7 +18,7 @@ int ** cria_matriz(int *m, int *n){
     fclose(f);
     
     //Malloc na matriz
-    mat = malloc(sizeof(int) * (*m));
+    mat = malloc(sizeof(int*) * (*m));
     for(int i=0;i < *m;i++){
         mat[i] = malloc(sizeof(int) * (*n));
     }
@@ -36,7 +36,7 @@ int conta_linha(FILE *f){
             nlinha++;
         }
     }
-    return nlinha;
+    return nlinha+1;
 }
 
 void insere_matriz(int*** mat, int m, int n){
