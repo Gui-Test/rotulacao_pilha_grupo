@@ -39,8 +39,10 @@ int main(){
     }
 
     print_matriz(mat,m,n);
-
     printf("MAIOR OBJETO: %d\n", maior_rotulo);
+
+    limpa_matriz(&mat, m, n, rotulo);
+    print_matriz(mat,m,n);
 
     destroi(pilha);
 

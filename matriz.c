@@ -138,6 +138,19 @@ info mover(int ***mat, info dir[4], info *novo){
     return aux;
 }
 
+//limpar a matriz e deixar apenas o maior objeto
+void limpa_matriz(int ***mat, int m, int n, int rot){
+    for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+            if((*mat)[i][j] == rot){
+                (*mat)[i][j] = 1;
+            }else{
+                (*mat)[i][j] = 0;
+            }
+        }
+    }
+}
+
 
     
 
