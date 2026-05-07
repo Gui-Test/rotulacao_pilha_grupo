@@ -44,7 +44,7 @@ int main(){
             }
         }
     }
-
+    printf("\n");
     print_matriz(mat,m,n);
     printf("MAIOR OBJETO: %d\n", maior_rotulo);
     printf("\n Baricentro: %d , %d\n", baricentroL, baricentroC);

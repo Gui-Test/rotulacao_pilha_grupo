@@ -85,7 +85,7 @@ int marcador(int i,int j,int rot, struct pilha *pil, info dir[4], int*** mat, in
     tam++;
 
     while(novo.lin >= 0){
-        novo = mover(mat, dir, &novo);
+        novo = mover(mat, dir, &novo,m,n);
         if(novo.lin >= 0){
             (*mat)[novo.lin][novo.col] = rot; 
             *bariCT += novo.col;
@@ -99,7 +99,7 @@ int marcador(int i,int j,int rot, struct pilha *pil, info dir[4], int*** mat, in
     while(vazia(pil) != SIM){
         desempilha(&novo, pil);
         while(novo.lin >= 0){
-            novo = mover(mat, dir, &novo);
+            novo = mover(mat, dir, &novo, m, n);
             if(novo.lin >= 0){
                 *bariCT += novo.col;
                 *bariLT += novo.lin;
@@ -114,35 +114,56 @@ int marcador(int i,int j,int rot, struct pilha *pil, info dir[4], int*** mat, in
 }
 
 //ideia: ver se tem algum 1 em volta e copia os dados de onde esse 1 está, se não retorna null.
-info mover(int ***mat, info dir[4], info *novo){
+info mover(int ***mat, info dir[4], info *novo, int m, int n){
     int l = novo->lin;
     int c = novo->col;
     info aux;
     aux.lin = l;
     aux.col = c;
-    if((*mat)[l+dir[0].lin][c+dir[0].col] == 1){
-        aux.lin += dir[0].lin;
-        aux.col += dir[0].col;
-        return aux;
+    if(verifica_matriz(aux, dir[0], m, n)){
+        if((*mat)[l+dir[0].lin][c+dir[0].col] == 1){
+            aux.lin += dir[0].lin;
+            aux.col += dir[0].col;
+            return aux;
+        }
     }
-    if((*mat)[l+dir[1].lin][c+dir[1].col] == 1){
-        aux.lin += dir[1].lin;
-        aux.col += dir[1].col;
-        return aux;
+    if(verifica_matriz(aux, dir[1], m, n)){
+        if((*mat)[l+dir[1].lin][c+dir[1].col] == 1){
+            aux.lin += dir[1].lin;
+            aux.col += dir[1].col;
+            return aux;
+        }
     }
-    if((*mat)[l+dir[2].lin][c+dir[2].col] == 1){
-        aux.lin += dir[2].lin;
-        aux.col += dir[2].col;
-        return aux;
+    if(verifica_matriz(aux, dir[2], m, n)){
+        if((*mat)[l+dir[2].lin][c+dir[2].col] == 1){
+            aux.lin += dir[2].lin;
+            aux.col += dir[2].col;
+            return aux;
+        }
     }
-    if((*mat)[l+dir[3].lin][c+dir[3].col] == 1){
-        aux.lin += dir[3].lin;
-        aux.col += dir[3].col;
-        return aux;
+    if(verifica_matriz(aux, dir[3], m, n)){
+        if((*mat)[l+dir[3].lin][c+dir[3].col] == 1){
+            aux.lin += dir[3].lin;
+            aux.col += dir[3].col;
+            return aux;
+        }
     }
-        aux.lin = -1;
-        aux.col = -1;
+    aux.lin = -1;
+    aux.col = -1;
     return aux;
+}
+
+//verifica se o próximo movimento existe na matriz, por causa dos cantos
+int verifica_matriz(info aux, info dir, int m,int n){
+    int lin = aux.lin+dir.lin;
+    int col = aux.col+dir.col;
+    if(lin > m || lin < 0){
+        return NAO;
+    }
+    if(col > n || col < 0){
+        return NAO;
+    }
+    return SIM;
 }
 
 //limpar a matriz e deixar apenas o maior objeto
