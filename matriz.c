@@ -158,6 +158,28 @@ void limpa_matriz(int ***mat, int m, int n, int rot){
     }
 }
 
+void saida(int **mat, int m, int n){
+    FILE *f = fopen("saida.txt", "w");
+    if(!f){
+        printf("Erro ao salvar arquivo.\n");
+        return;
+    }
+
+    char ch = ' ';
+
+    for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+            ch = mat[i][j] + '0';
+            fputc(ch, f);
+        }
+        ch = '\n';
+        fputc(ch, f);
+    }
+
+    fclose(f);
+    printf("\nSaida salva com sucesso!\n");
+}
+
 
     
 

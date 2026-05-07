@@ -29,7 +29,6 @@ int main(){
         for (int j=0;j < n;j++){
             if (mat[i][j] == 1){
                 rotulo+=10;
-                printf("(%d %d)", i, j);
                 tam_objeto = marcador(i,j,rotulo,pilha,direcao,&mat,m,n, &bariLT, &bariCT);
                 printf("\nObjeto %d: tamanho %d", rotulo, tam_objeto);
                 if(tam_objeto > maior){
@@ -45,13 +44,15 @@ int main(){
             }
         }
     }
-    printf("\n Baricentro: %d , %d", baricentroL, baricentroC);
 
     print_matriz(mat,m,n);
     printf("MAIOR OBJETO: %d\n", maior_rotulo);
+    printf("\n Baricentro: %d , %d\n", baricentroL, baricentroC);
 
     limpa_matriz(&mat, m, n, rotulo);
     print_matriz(mat,m,n);
+
+    saida(mat,m,n);
 
     destroi(pilha);
 
